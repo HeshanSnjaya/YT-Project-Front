@@ -8,8 +8,8 @@ const App = () => (
       <Navbar />
       <Feed />
       <Routes>
-        <Route path="/new%20videos" exact element={<Videos />} />
-        <Route path="/subscribe" exact element={<Subscribe />} />
+        <Route path="/new videos" element={<Videos />} />
+        <Route path="/subscribe" element={<Subscribe />} />
       </Routes>
     </Box>
   </BrowserRouter>
