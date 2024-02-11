@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
-  Grid,
   Typography,
-  Box,
-  Card,
   CardMedia,
-  Paper,
   Stack,
   CardContent,
+  Button,
 } from "@mui/material";
 
 const VideosPage = () => {
@@ -33,6 +30,8 @@ const VideosPage = () => {
   const getImageUrl = (videoId) =>
     `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
+  const getVideoUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
+
   return (
     <Stack direction="column" spacing={2}>
       {notifications.map((notification) => (
@@ -52,6 +51,15 @@ const VideosPage = () => {
                 <p>Published DateTime : {notification.publishedDateTime}</p>
                 <p>UpdatedDateTime : {notification.updatedDateTime}</p>
                 <p>Tracked Time : {notification.trackedTime}</p>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "red", color: "white" }}
+                  onClick={() =>
+                    window.open(getVideoUrl(notification.videoId), "_blank")
+                  }
+                >
+                  Watch Video
+                </Button>
               </Typography>
             </CardContent>
           </Stack>
