@@ -3,10 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { SideBar, Videos, Subscribe } from "./";
 
 const Feed = () => {
-  // const [selectedCategory, setSelectedCategory] = useState("New Videos");
-  const [selectedCategory, setSelectedCategory] = useState(
-    localStorage.getItem("selectedCategory") || "New Videos"
-  );
+  const [selectedCategory, setSelectedCategory] = useState("New Videos");
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
