@@ -7,10 +7,10 @@ const App = () => (
     <Box sx={{ backgroundColor: "#000" }}>
       <Navbar />
       <Feed />
-      <Routes>
-        <Route path="/new videos" element={<Videos />} />
+      {/* <Routes>
+        <Route path="/new%20videos" element={<Videos />} />
         <Route path="/subscribe" element={<Subscribe />} />
-      </Routes>
+      </Routes> */}
     </Box>
   </BrowserRouter>
 );
