@@ -45,7 +45,6 @@ const VideosPage = () => {
             />
             <CardContent>
               <Typography variant="body2" color="white">
-                {/* Title :{notification.videoTitle} */}
                 <p>Channel Id: {notification.channelId}</p>
                 <p>Video Id: {notification.videoId}</p>
                 <p>Published DateTime : {notification.publishedDateTime}</p>

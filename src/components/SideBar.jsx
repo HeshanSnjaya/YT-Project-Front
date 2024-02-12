@@ -13,7 +13,6 @@ const SideBar = ({ selectedCategory, setSelectedCategory }) => (
     }}
   >
     {categories.map((category) => (
-      // <button
       <Link
         to={`/${category.name.toLowerCase()}`} // Adjust the URL structure as needed
         className="category-btn"

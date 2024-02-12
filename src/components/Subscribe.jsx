@@ -16,10 +16,8 @@ const Subscribe = () => {
         .then(() => setOpen(true));
 
       console.log("Subscribe request successful:", response.data);
-      // Handle success, update state, or perform any other necessary actions
     } catch (error) {
       console.error("Error subscribing:", error);
-      // Handle error, show user a message, or perform any other necessary actions
     }
   };
 
@@ -41,7 +39,6 @@ const Subscribe = () => {
         sx={{ backgroundColor: "#fff" }}
         id="filled-basic"
         variant="filled"
-        // width="10ch"
         style={{ maxWidth: "500px" }}
         onChange={(e) => setChannelId(e.target.value)}
       />
