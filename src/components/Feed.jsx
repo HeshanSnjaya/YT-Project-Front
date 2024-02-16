@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { SideBar, Videos, Subscribe } from "./";
+import Slot1 from "./Slot1";
+import Slot2 from "./Slot2";
+import Slot3 from "./Slot3";
+import Slot4 from "./Slot4";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New Videos");
@@ -36,12 +40,20 @@ const Feed = () => {
         >
           {selectedCategory}
         </Typography>
-        <div>
+        {/* <div>
           {selectedCategory === "New Videos" ? (
             <Videos />
           ) : (
             selectedCategory === "Subscribe" && <Subscribe />
           )}
+        </div> */}
+        <div>
+          {selectedCategory === "New Videos" && <Videos />}
+          {selectedCategory === "Subscribe" && <Subscribe />}
+          {selectedCategory === "Slot 1" && <Slot1 />}
+          {selectedCategory === "Slot 2" && <Slot2 />}
+          {selectedCategory === "Slot 3" && <Slot3 />}
+          {selectedCategory === "Slot 4" && <Slot4 />}
         </div>
       </Box>
     </Stack>

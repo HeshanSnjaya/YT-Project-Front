@@ -7,21 +7,21 @@ import {
   Button,
 } from "@mui/material";
 
-// export default VideosPage;
-const VideosPage = () => {
+const Slot2 = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchNotifications = async () => {
     try {
       const response = await fetch(
-        "https://ytbackend-jftb.onrender.com/api/v1/notification"
+        `https://ytbackend-jftb.onrender.com/api/v1/notification/by-slot/2`
       );
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       console.error("Error fetching notifications:", error);
-      throw error; // rethrow the error to propagate it further if needed
+      throw error;
     }
   };
 
@@ -29,7 +29,7 @@ const VideosPage = () => {
     const loadNotifications = async () => {
       try {
         const data = await fetchNotifications();
-        setNotifications(data.reverse());
+        setNotifications(data);
       } finally {
         setLoading(false);
       }
@@ -51,10 +51,38 @@ const VideosPage = () => {
           method: "PUT",
         }
       );
-      // Update the state or fetch notifications again after a successful request
-      // Example: refetch notifications
       const updatedNotifications = await fetchNotifications();
-      setNotifications(updatedNotifications.reverse());
+      setNotifications(updatedNotifications);
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
+  const requestVideos = async () => {
+    try {
+      await fetch(
+        `https://ytbackend-jftb.onrender.com/api/v1/notification/request/2`,
+        {
+          method: "PUT",
+        }
+      );
+      const updatedNotifications = await fetchNotifications();
+      setNotifications(updatedNotifications);
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
+  const clearVideos = async () => {
+    try {
+      await fetch(
+        `https://ytbackend-jftb.onrender.com/api/v1/notification/update-by-slot?slotId=2`,
+        {
+          method: "PUT",
+        }
+      );
+      const updatedNotifications = await fetchNotifications();
+      setNotifications(updatedNotifications);
     } catch (error) {
       console.error("Error updating notification:", error);
     }
@@ -62,6 +90,26 @@ const VideosPage = () => {
 
   return (
     <Stack direction="column" spacing={2}>
+      <Stack direction="row" spacing={10}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={requestVideos}
+          style={{ maxWidth: "300px" }}
+          sx={{ marginBottom: 2 }}
+        >
+          Request 10 New Videos
+        </Button>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: "red", color: "white", maxWidth: "300px" }}
+          onClick={clearVideos}
+          sx={{ marginBottom: 2 }}
+        >
+          Clear Videos
+        </Button>
+      </Stack>
+      <br />
       {loading ? (
         <Typography variant="body2" color="white">
           Loading...
@@ -102,7 +150,7 @@ const VideosPage = () => {
                   </Button>
                   <br />
                   <br />
-                  {/* <Button
+                  <Button
                     variant="contained"
                     color="primary"
                     onClick={() =>
@@ -111,8 +159,8 @@ const VideosPage = () => {
                     sx={{ marginRight: 2 }}
                   >
                     Claimable
-                  </Button> */}
-                  {/* <Button
+                  </Button>
+                  <Button
                     variant="contained"
                     color="secondary"
                     onClick={() =>
@@ -120,7 +168,7 @@ const VideosPage = () => {
                     }
                   >
                     Not Claimable
-                  </Button> */}
+                  </Button>
                 </Typography>
               </CardContent>
             </Stack>
@@ -131,4 +179,4 @@ const VideosPage = () => {
   );
 };
 
-export default VideosPage;
+export default Slot2;
