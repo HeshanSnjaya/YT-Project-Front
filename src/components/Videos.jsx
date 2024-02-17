@@ -29,7 +29,7 @@ const VideosPage = () => {
     const loadNotifications = async () => {
       try {
         const data = await fetchNotifications();
-        setNotifications(data.reverse());
+        setNotifications(data);
       } finally {
         setLoading(false);
       }
@@ -51,10 +51,8 @@ const VideosPage = () => {
           method: "PUT",
         }
       );
-      // Update the state or fetch notifications again after a successful request
-      // Example: refetch notifications
       const updatedNotifications = await fetchNotifications();
-      setNotifications(updatedNotifications.reverse());
+      setNotifications(updatedNotifications);
     } catch (error) {
       console.error("Error updating notification:", error);
     }
