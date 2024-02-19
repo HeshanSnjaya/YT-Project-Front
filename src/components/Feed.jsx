@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { SideBar, Videos, Subscribe } from "./";
 import Slot1 from "./Slot1";
 import Slot2 from "./Slot2";
 import Slot3 from "./Slot3";
 import Slot4 from "./Slot4";
+import Archived from "./Archived";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New Videos");
@@ -54,6 +55,7 @@ const Feed = () => {
           {selectedCategory === "Slot 2" && <Slot2 />}
           {selectedCategory === "Slot 3" && <Slot3 />}
           {selectedCategory === "Slot 4" && <Slot4 />}
+          {selectedCategory === "Archived Videos" && <Archived />}
         </div>
       </Box>
     </Stack>

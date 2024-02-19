@@ -7,21 +7,21 @@ import {
   Button,
 } from "@mui/material";
 
-// export default VideosPage;
-const VideosPage = () => {
+const Archived = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchNotifications = async () => {
     try {
       const response = await fetch(
-        "https://ytbackend-jftb.onrender.com/api/v1/notification"
+        `https://ytbackend-jftb.onrender.com/api/v1/notification/archived`
       );
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       console.error("Error fetching notifications:", error);
-      throw error; // rethrow the error to propagate it further if needed
+      throw error;
     }
   };
 
@@ -43,8 +43,24 @@ const VideosPage = () => {
 
   const getVideoUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
 
+  const handleClaimableClick = async (notificationId, claimable) => {
+    try {
+      await fetch(
+        `https://ytbackend-jftb.onrender.com/api/v1/notification/${notificationId}?claimable=${claimable}`,
+        {
+          method: "PUT",
+        }
+      );
+      const updatedNotifications = await fetchNotifications();
+      setNotifications(updatedNotifications);
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
   return (
     <Stack direction="column" spacing={2}>
+      <br />
       {loading ? (
         <Typography variant="body2" color="white">
           Loading...
@@ -85,6 +101,25 @@ const VideosPage = () => {
                   </Button>
                   <br />
                   <br />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() =>
+                      handleClaimableClick(notification.notificationId, true)
+                    }
+                    sx={{ marginRight: 2 }}
+                  >
+                    Claimable
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() =>
+                      handleClaimableClick(notification.notificationId, false)
+                    }
+                  >
+                    Not Claimable
+                  </Button>
                 </Typography>
               </CardContent>
             </Stack>
@@ -95,4 +130,4 @@ const VideosPage = () => {
   );
 };
 
-export default VideosPage;
+export default Archived;
