@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Subscribe = () => {
   const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = useState("");
 
   const [channelId, setChannelId] = useState("");
 
@@ -13,11 +14,31 @@ const Subscribe = () => {
         .post(
           `https://ytbackend-jftb.onrender.com/api/v1/subscribe?channelId=${channelId}&mode=subscribe`
         )
-        .then(() => setOpen(true));
+        .then(() => {
+          setOpen(true);
+          setMessage("Channel is subscribed !");
+        });
 
       console.log("Subscribe request successful:", response.data);
     } catch (error) {
-      console.error("Error subscribing:", error);
+      console.error("Error Subscribing:", error);
+    }
+  };
+
+  const handleUnsubscribe = async () => {
+    try {
+      const response = await axios
+        .post(
+          `https://ytbackend-jftb.onrender.com/api/v1/subscribe?channelId=${channelId}&mode=unsubscribe`
+        )
+        .then(() => {
+          setOpen(true);
+          setMessage("Channel is Unsubscribed !");
+        });
+
+      console.log("Unsubscribe request successful:", response.data);
+    } catch (error) {
+      console.error("Error Unsubscribing:", error);
     }
   };
 
@@ -55,7 +76,22 @@ const Subscribe = () => {
         autoHideDuration={5000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        message="Subscribe request successful !"
+        message={message}
+      />
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleUnsubscribe}
+        style={{ maxWidth: "9rem" }}
+      >
+        Unsubscribe
+      </Button>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        message={message}
       />
     </div>
   );
