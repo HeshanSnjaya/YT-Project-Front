@@ -5,6 +5,7 @@ import Slot1 from "./Slot1";
 import Slot2 from "./Slot2";
 import Slot3 from "./Slot3";
 import Slot4 from "./Slot4";
+import Slot from "./Slot";
 import Archived from "./Archived";
 
 const Feed = () => {
@@ -51,10 +52,14 @@ const Feed = () => {
         <div>
           {selectedCategory === "New Videos" && <Videos />}
           {selectedCategory === "Subscribe" && <Subscribe />}
-          {selectedCategory === "Slot 1" && <Slot1 />}
+          {/* {selectedCategory === "Slot 1" && <Slot1 />}
           {selectedCategory === "Slot 2" && <Slot2 />}
           {selectedCategory === "Slot 3" && <Slot3 />}
-          {selectedCategory === "Slot 4" && <Slot4 />}
+          {selectedCategory === "Slot 4" && <Slot4 />} */}
+          {selectedCategory === "Slot 1" && <Slot slotId={1} />}
+          {selectedCategory === "Slot 2" && <Slot slotId={2} />}
+          {selectedCategory === "Slot 3" && <Slot slotId={3} />}
+          {selectedCategory === "Slot 4" && <Slot slotId={4} />}
           {selectedCategory === "Archived Videos" && <Archived />}
         </div>
       </Box>
